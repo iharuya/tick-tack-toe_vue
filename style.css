@@ -1,114 +1,175 @@
 :root {
-    --primary: #2E7D32;
-    --light: #60ad5e;
-    --dark: #005005;
-    --secondary: #2e7c31;
+	--primary: #2E7D32;
+	--light: #60ad5e;
+	--dark: #005005;
+	--secondary: #2e7c31;
 }
 
 html {
-    font-family: 'Arial', sans-serif;
+	font-family: 'Arial', sans-serif;
 }
 
-a:link {color: #1564bf;}
-a:visited {color: #003b8e;}
-a:hover {color: #5e91f2;}
-a:active {color: #283593;}
+a:link {
+	color: #1564bf;
+}
+
+a:visited {
+	color: #003b8e;
+}
+
+a:hover {
+	color: #5e91f2;
+}
+
+a:active {
+	color: #283593;
+}
 
 .container {
-    padding: 16px;
+	padding: 16px;
 }
 
 .header {
-    background: var(--primary);
-    padding: 10px 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
-}
-.header a {
-    color: white;
-    text-decoration: none;
-}
-.header--title {
-    font-size: 24px;
-}
-.header--content__list {
-    display: flex;
-}
-.header--content__list--item:hover {
-    opacity: 0.6;
-}
-.header--content__list--item:not(:last-child) {
-    padding-right: 24px;
+	background: var(--primary);
+	padding: 10px 16px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	color: white;
 }
 
+.header a {
+	color: white;
+	text-decoration: none;
+}
+
+.header--title {
+	font-size: 24px;
+}
+
+.header--content__list {
+	display: flex;
+}
+
+.header--content__list--item:hover {
+	opacity: 0.6;
+}
+
+.header--content__list--item:not(:last-child) {
+	padding-right: 24px;
+}
+
+
+#game {
+	display: flex;
+	flex-wrap: wrap;
+}
 
 .game--header {
-    background: var(--primary);
-    margin-bottom: 16px;
-    padding: 8px 16px;
-    color: white;
-    font-size: 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	width: 100%;
+	background: var(--primary);
+	margin-bottom: 16px;
+	padding: 8px 16px;
+	color: white;
+	font-size: 24px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
+
 .game--header__control--button {
-    font-size: 20px;
-    background: var(--dark);
-    color: white;
-    border: none;
-    padding: 4px 12px;
-    border-radius: 8px;
+	font-size: 20px;
+	background: var(--dark);
+	color: white;
+	border: none;
+	padding: 4px 12px;
+	border-radius: 8px;
 }
+
 .game--header__control--button:hover {
-    opacity: 0.8;
+	opacity: 0.8;
 }
 
 .game--board {
-    display: grid;
-    width: 50%;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+	display: grid;
+	width: 70%;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
 }
+
 .game--board.ended {
-    opacity: 0.6;
+	opacity: 0.6;
 }
+
 .game--board::before {
-    content: '';
-    width: 0;
-    padding-bottom: 100%;
-    grid-row: 1 / 1;
-    grid-column: 1 / 1;
+	content: '';
+	width: 0;
+	padding-bottom: 100%;
+	grid-row: 1 / 1;
+	grid-column: 1 / 1;
 }
-.game--board > *:first-child{
-    grid-row: 1 / 1;
-    grid-column: 1 / 1;
+
+.game--board>*:first-child {
+	grid-row: 1 / 1;
+	grid-column: 1 / 1;
 }
 
 .game--board__box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    font-size: 64px;
-    padding-left: 8px;
-    padding-bottom: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	font-size: 64px;
+	padding-left: 8px;
+	padding-bottom: 8px;
 }
+
 .game--board__box::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: calc(100% - 8px);
-    height: calc(100% - 8px);
-    border: #ababab 8px solid;
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: calc(100% - 8px);
+	height: calc(100% - 8px);
+	border: #ababab 8px solid;
 }
 
 
+.game--info {
+	width: 30%;
+	padding-left: 24px;
+}
+
+.game--info__history--title {
+	font-size: 24px;
+	border-bottom: var(--primary) 4px solid;
+}
+
+.game--info__history--step {
+	font-size: 16px;
+	display: block;
+	margin-bottom: 10px;
+	background: var(--light);
+	border: var(--primary) 4px solid;
+	letter-spacing: 2px;
+	color: white;
+	border-radius: 16px;
+	padding: 6px 16px;
+}
+.game--info__history--step:hover {
+	opacity: 0.8;
+}
+.game--info__history--step:disabled {
+	opacity: 0.6;
+}
 
 @media screen and (max-width: 480px) {
-    .game--board {
-        width: calc(100% - 8px);
-    }
+	.game--board {
+		width: calc(100% - 8px);
+	}
+
+	.game--info {
+		width: 100%;
+		padding-left: none;
+	}
 }

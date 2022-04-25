@@ -4,8 +4,15 @@ export default {
 			nextIsX: true,
 			status: null,
 			board: Array(9).fill(null),
+			history: [],
 			ended: false,
 			boxSize: null,
+		}
+	},
+
+	computed: {
+		turn() {
+			return this.nextIsX ? "x" : "o"
 		}
 	},
 
@@ -23,13 +30,30 @@ export default {
 				this.ended = true
 				return
 			}
-			this.status = this.nextIsX ? "Turn: x" : "Turn: o"
+			this.status = "Turn: " + this.turn
 		},
 
 		updateBox(idx) {
 			if (this.ended || this.board[idx]) return
-			this.board[idx] = this.nextIsX ? "x" : "o"
+			this.board[idx] = this.turn
+			const coord = this.idxToCoord(idx)
+			const explanation = `(${coord[0]}, ${coord[1]}) by ${this.turn}`
+			this.history.push({
+				turn: this.turn.slice(),
+				board: [...this.board],
+				explanation
+			})
 			this.nextIsX = !this.nextIsX
+			this.updateGame()
+		},
+
+		backTo(idx) {
+			// player cannot go back to the latest step
+			if (idx === this.history.length - 1) return
+			const step = this.history[idx]
+			this.board = step.board
+			this.nextIsX = !step.turn === 'x'
+			this.history.splice(idx+1)
 			this.updateGame()
 		},
 
@@ -53,8 +77,23 @@ export default {
 			return null
 		},
 
+		idxToCoord(idx) {
+			/*
+			0 1 2
+			3 4 5
+			6 7 8
+
+			0: (0, 0)
+			7: (2, 1)
+			*/
+			const line = Math.floor(idx / 3)
+			const row = idx % 3
+			return [line, row]
+		},
+
 		reset() {
 			this.board = Array(9).fill(null)
+			this.history = []
 			this.ended = false
 			this.updateGame()
 		}
@@ -84,8 +123,20 @@ export default {
 			}"
 		>{{content}}</div>
 	</div>
-	<div class="game--info">
-		
+	<div class="game--info container">
+		<div class="game--info__history">
+			<h2 class="game--info__history--title">Previous steps</h2>
+			<div class="game--info__history--steps container">
+				<button 
+					class="game--info__history--step"
+					v-for="(step, idx) in history"
+					@click="backTo(idx)"
+					:disabled="ended"
+				>
+					{{step.explanation}}
+				</button>
+			</div>
+		</div>
 	</div>
 	`
 
