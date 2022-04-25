@@ -17,6 +17,12 @@ export default {
 				this.ended = true
 				return
 			}
+			// if all boxes are determined
+			if (this.board.every((i) => i)) {
+				this.status = `Draw`
+				this.ended = true
+				return
+			}
 			this.status = this.nextIsX ? "Turn: x" : "Turn: o"
 		},
 
