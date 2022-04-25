@@ -37,7 +37,9 @@ export default {
 			if (this.ended || this.board[idx]) return
 			this.board[idx] = this.turn
 			const coord = this.idxToCoord(idx)
-			const explanation = `(${coord[0]}, ${coord[1]}) by ${this.turn}`
+			const explanation = `
+				[${this.history.length+1}]: (${coord[0]}, ${coord[1]}) by ${this.turn}
+			`
 			this.history.push({
 				turn: this.turn.slice(),
 				board: [...this.board],
@@ -126,7 +128,7 @@ export default {
 	<div class="game--info container">
 		<div class="game--info__history">
 			<h2 class="game--info__history--title">Previous steps</h2>
-			<div class="game--info__history--steps container">
+			<div class="game--info__history--steps">
 				<button 
 					class="game--info__history--step"
 					v-for="(step, idx) in history"

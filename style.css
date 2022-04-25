@@ -93,6 +93,7 @@ a:active {
 .game--board {
 	display: grid;
 	width: 70%;
+	margin-bottom: 16px;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-template-rows: 1fr 1fr 1fr;
 }
@@ -137,24 +138,31 @@ a:active {
 
 .game--info {
 	width: 30%;
+	padding: 16px;
 	padding-left: 24px;
 }
 
 .game--info__history--title {
 	font-size: 24px;
 	border-bottom: var(--primary) 4px solid;
+	margin-bottom: 16px;
 }
 
+.game--info__history--steps {
+	display: flex;
+	flex-wrap: wrap;
+}
 .game--info__history--step {
 	font-size: 16px;
 	display: block;
+	margin: 2px;
 	margin-bottom: 10px;
 	background: var(--light);
 	border: var(--primary) 4px solid;
-	letter-spacing: 2px;
+	letter-spacing: 1px;
 	color: white;
 	border-radius: 16px;
-	padding: 6px 16px;
+	padding: 6px 10px;
 }
 .game--info__history--step:hover {
 	opacity: 0.8;
@@ -170,6 +178,6 @@ a:active {
 
 	.game--info {
 		width: 100%;
-		padding-left: none;
+		padding: 0;
 	}
 }
