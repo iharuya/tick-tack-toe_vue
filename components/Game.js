@@ -53,8 +53,8 @@ export default {
 			// player cannot go back to the latest step
 			if (idx === this.history.length - 1) return
 			const step = this.history[idx]
-			this.board = step.board
-			this.nextIsX = !step.turn === 'x'
+			this.board = [...step.board]
+			this.nextIsX = !(step.turn === 'x')
 			this.history.splice(idx+1)
 			this.updateGame()
 		},
